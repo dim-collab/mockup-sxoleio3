@@ -8,54 +8,63 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Σχολικό Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SchoolHub</title>
 
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css">
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 </head>
 <body>
 
-<header>
-  <h1>📚 Σχολικό Blog</h1>
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">SchoolHub</div>
+  <nav>
+    <a href="#">Αρχική</a>
+    <a href="#gallery">Δραστηριότητες</a>
+    <a href="#posts">Ανακοινώσεις</a>
+    <a href="#auth">Σύνδεση</a>
+  </nav>
 </header>
 
-<section>
-  <h2>Σύνδεση / Εγγραφή</h2>
+<!-- HERO -->
+<section class="hero">
+  <div class="overlay">
+    <h1>Καλώς ήρθατε στο σχολικό μας portal</h1>
+    <p>Μοιραστείτε στιγμές, εργασίες και δραστηριότητες</p>
+  </div>
+</section>
+
+<!-- AUTH -->
+<section id="auth" class="section">
+  <h2>Σύνδεση</h2>
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-
   <select id="role">
     <option value="student">Μαθητής</option>
     <option value="teacher">Καθηγητής</option>
   </select>
-
-  <button onclick="register()">Register</button>
   <button onclick="login()">Login</button>
-  <button onclick="logout()">Logout</button>
 </section>
 
-<section>
-  <h2>Upload</h2>
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <h2>📸 Δραστηριότητες</h2>
   <input type="file" id="file">
   <button onclick="upload()">Upload</button>
-
-  <div id="gallery" class="grid"></div>
+  <div id="galleryGrid" class="grid"></div>
 </section>
 
-<section>
-  <h2>Αναρτήσεις</h2>
+<!-- POSTS -->
+<section id="posts" class="section">
+  <h2>📝 Ανακοινώσεις</h2>
   <textarea id="postText"></textarea>
   <button onclick="createPost()">Δημοσίευση</button>
-
-  <div id="posts" class="grid"></div>
+  <div id="postsGrid" class="grid"></div>
 </section>
 
 <script src="script.js"></script>
