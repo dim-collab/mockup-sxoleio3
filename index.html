@@ -12,134 +12,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Σχολικό Blog</title>
 
-  <!-- Firebase SDKs -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
 
-  <style>
-    body { font-family: Arial; margin:0; background:#f4f7fb; }
-    header { background:linear-gradient(45deg,#4facfe,#00f2fe); color:white; padding:15px; text-align:center; }
-    section { padding:20px; }
-    input, select { padding:10px; margin:5px; }
-    button { padding:10px; background:#4facfe; border:none; color:white; cursor:pointer; }
-    img, video { max-width:200px; margin:10px; }
-  </style>
 </head>
 <body>
 
 <header>
-  <h1>📚 Σχολικό Blog (Production)</h1>
+  <h1>📚 Σχολικό Blog</h1>
 </header>
 
 <section>
-  <h2>🔐 Register / Login</h2>
+  <h2>Σύνδεση / Εγγραφή</h2>
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
+
   <select id="role">
     <option value="student">Μαθητής</option>
     <option value="teacher">Καθηγητής</option>
   </select>
+
   <button onclick="register()">Register</button>
   <button onclick="login()">Login</button>
   <button onclick="logout()">Logout</button>
 </section>
 
 <section>
-  <h2>⬆️ Upload Media</h2>
+  <h2>Upload</h2>
   <input type="file" id="file">
   <button onclick="upload()">Upload</button>
-  <div id="gallery"></div>
+
+  <div id="gallery" class="grid"></div>
 </section>
 
 <section>
-  <h2>📝 Posts</h2>
+  <h2>Αναρτήσεις</h2>
   <textarea id="postText"></textarea>
-  <button onclick="createPost()">Post</button>
-  <div id="posts"></div>
+  <button onclick="createPost()">Δημοσίευση</button>
+
+  <div id="posts" class="grid"></div>
 </section>
 
-<script>
-// 🔥 Replace this
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_DOMAIN",
-  projectId: "YOUR_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "",
-  appId: ""
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-const storage = firebase.storage();
-
-let currentUserRole = null;
-
-async function register() {
-  const email = emailInput.value;
-  const password = passwordInput.value;
-  const role = roleInput.value;
-
-  const userCred = await auth.createUserWithEmailAndPassword(email, password);
-
-  await db.collection('users').doc(userCred.user.uid).set({ role });
-}
-
-async function login() {
-  const email = emailInput.value;
-  const password = passwordInput.value;
-
-  const userCred = await auth.signInWithEmailAndPassword(email, password);
-
-  const doc = await db.collection('users').doc(userCred.user.uid).get();
-  currentUserRole = doc.data().role;
-}
-
-function logout() {
-  auth.signOut();
-}
-
-async function upload() {
-  const file = document.getElementById('file').files[0];
-  const ref = storage.ref().child(file.name);
-  await ref.put(file);
-  const url = await ref.getDownloadURL();
-
-  const el = file.type.startsWith('image') ? document.createElement('img') : document.createElement('video');
-  el.src = url;
-  if (el.tagName === 'VIDEO') el.controls = true;
-  document.getElementById('gallery').appendChild(el);
-}
-
-async function createPost() {
-  const text = document.getElementById('postText').value;
-
-  if (currentUserRole === 'teacher') {
-    await db.collection('posts').add({ text, role: 'teacher', created: Date.now() });
-  } else {
-    await db.collection('posts').add({ text, role: 'student', created: Date.now() });
-  }
-
-  loadPosts();
-}
-
-async function loadPosts() {
-  const snapshot = await db.collection('posts').orderBy('created','desc').get();
-  const container = document.getElementById('posts');
-  container.innerHTML = '';
-
-  snapshot.forEach(doc => {
-    const div = document.createElement('div');
-    div.textContent = doc.data().role + ': ' + doc.data().text;
-    container.appendChild(div);
-  });
-}
-
-loadPosts();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
