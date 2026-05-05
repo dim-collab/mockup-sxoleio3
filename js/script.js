@@ -80,7 +80,7 @@ async function upload() {
 // ================= GALLERY =================
 
 db.collection('media').onSnapshot(snapshot => {
-  const container = document.getElementById('gallery');
+  const container = document.getElementById('galleryGrid');
   container.innerHTML = '';
 
   snapshot.forEach(doc => {
@@ -120,7 +120,7 @@ function loadPostsRealtime() {
   db.collection('posts')
     .orderBy('created','desc')
     .onSnapshot(snapshot => {
-      const container = document.getElementById('posts');
+      const container = document.getElementById('postsGrid');
       container.innerHTML = '';
 
       snapshot.forEach(doc => {
