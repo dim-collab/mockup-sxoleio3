@@ -1,72 +1,45 @@
-<!-- README: School Blog Production Version (Firebase) -->
-<!-- 1. Create Firebase project
-2. Enable Authentication (Email/Password)
-3. Enable Firestore Database
-4. Enable Storage
-5. Replace firebaseConfig below -->
-
 <!DOCTYPE html>
 <html lang="el">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SchoolHub</title>
-
 <link rel="stylesheet" href="styles.css">
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<header class="navbar">
+<header class="nav">
   <div class="logo">SchoolHub</div>
   <nav>
-    <a href="#">Αρχική</a>
-    <a href="#gallery">Δραστηριότητες</a>
-    <a href="#posts">Ανακοινώσεις</a>
-    <a href="#auth">Σύνδεση</a>
+    <a href="index.html">Αρχική</a>
+    <a href="courses.html">Δραστηριότητες</a>
+    <a href="events.html">Events</a>
+    <a href="blog.html">Ανακοινώσεις</a>
+    <a href="auth.html" class="btn">Login</a>
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="overlay">
-    <h1>Καλώς ήρθατε στο σχολικό μας portal</h1>
-    <p>Μοιραστείτε στιγμές, εργασίες και δραστηριότητες</p>
+  <div class="hero-content">
+    <h1>Σχολείο του μέλλοντος</h1>
+    <p>Μοιραστείτε δραστηριότητες, εργασίες και σχολικά γεγονότα</p>
+    <a href="courses.html" class="btn-primary">Ξεκίνα</a>
   </div>
 </section>
 
-<!-- AUTH -->
-<section id="auth" class="section">
-  <h2>Σύνδεση</h2>
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <select id="role">
-    <option value="student">Μαθητής</option>
-    <option value="teacher">Καθηγητής</option>
-  </select>
-  <button onclick="login()">Login</button>
+<section class="section">
+  <h2>Τι προσφέρουμε</h2>
+
+  <div class="grid">
+    <div class="card">📸 Gallery δραστηριοτήτων</div>
+    <div class="card">📝 Ανακοινώσεις</div>
+    <div class="card">🎓 Μαθητικό υλικό</div>
+    <div class="card">👩‍🏫 Καθηγητές</div>
+  </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery" class="section">
-  <h2>📸 Δραστηριότητες</h2>
-  <input type="file" id="file">
-  <button onclick="upload()">Upload</button>
-  <div id="galleryGrid" class="grid"></div>
-</section>
-
-<!-- POSTS -->
-<section id="posts" class="section">
-  <h2>📝 Ανακοινώσεις</h2>
-  <textarea id="postText"></textarea>
-  <button onclick="createPost()">Δημοσίευση</button>
-  <div id="postsGrid" class="grid"></div>
-</section>
-
-<script src="script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
